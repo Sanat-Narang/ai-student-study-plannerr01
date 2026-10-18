@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: studyplanner-ai
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: STUDYPLANNER_DB
+        value: /var/data/studyplanner.db
+    disk:
+      name: studyplanner-data
+      mountPath: /var/data
+      sizeGB: 1
